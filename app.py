@@ -4,20 +4,25 @@ import socket
 
 app = Flask(__name__)
 
-VERSION = os.getenv("APP_VERSION", "v1")
+VERSION = os.getenv("APP_VERSION", "v2")
 HOSTNAME = socket.gethostname()
 
 @app.route("/")
 def home():
-    return {
-        "message": "Hello from Docker!",
-        "version": VERSION,
-        "hostname": HOSTNAME
+   return {
+     "message": "Welcome to Version 2 Deployment!",
+     "version": VERSION,
+     "hostname": HOSTNAME,
+     "status": "Application Updated Successfully"
     }
 
 @app.route("/health")
 def health():
-    return {"status": "healthy"}, 200
+   return {
+   "status": "healthy",
+   "version": VERSION
+   }, 200
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+     app.run(host="0.0.0.0", port=8080)
+
